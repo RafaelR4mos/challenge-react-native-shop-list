@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${({ theme }) => theme.COLORS.DARK_BLUE};
 `;
 
 export const Title = styled.Text`
@@ -35,22 +35,16 @@ export const Subtitle = styled.Text`
 
 export const ListCount = styled.Text`
   text-align: left;
+  margin-bottom: 12;
 
   ${({ theme }) => css`
-    color: ${theme.COLORS.BLACK};
+    color: ${theme.COLORS.GRAY_200};
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.SM}px;
   `}
 `;
 
-export const ListGalery = styled.View`
-  display: flex;
-  gap: 16px;
-  width: 100%;
-
-  margin-top: 12px;
-`;
-
 export const ButtonContainer = styled.View`
+  padding-top: 32px;
   margin-top: auto;
 `;

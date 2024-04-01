@@ -1,4 +1,4 @@
-import { StatusBar } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import {
   Inter_400Regular,
   Inter_700Bold,
@@ -20,10 +20,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar
-        barStyle="light-content"
         backgroundColor="#040C2C"
-        translucent
+        style="light"
       />
+
       {fontLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );

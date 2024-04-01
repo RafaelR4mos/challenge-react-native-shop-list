@@ -12,7 +12,7 @@ export function TextField({ inputRef, ...rest }: TextFieldProps) {
   return (
     <InputContainer
       ref={inputRef}
-      placeholder={COLORS.GRAY_700}
+      placeholderTextColor={COLORS.GRAY_200}
       {...rest}
     />
   );

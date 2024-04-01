@@ -1,21 +1,58 @@
-import { Text } from 'react-native';
 import {
   ButtonContainer,
   Container,
   Content,
   ListCount,
-  ListGalery,
   Subtitle,
   Title,
 } from './styles';
 import { Header } from '../../components/Header';
 import { ListCard } from '../../components/ListCard';
 import { Button } from '../../components/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
+import { FlatList } from 'react-native';
+import { listsGetAll } from '../../storage/list/listGetAll';
+import { Loading } from '../../components/Loading';
+
+export type ShoppingItem = {
+  itemId: string;
+  text: string;
+  checked: boolean;
+};
+
+export interface ShoppingList {
+  id: string;
+  title: string;
+  createdAt: string;
+  items: ShoppingItem[];
+}
 
 export function Lists() {
+  const [shopList, setShopList] = useState<ShoppingList[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
 
+  async function fetchLists() {
+    try {
+      const lists = await listsGetAll();
+      setShopList(lists);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleNavigateToList(list: ShoppingList) {
+    navigation.navigate('list', { listData: list });
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchLists();
+    }, [])
+  );
   return (
     <Container>
       <Header title="Minhas listas" />
@@ -24,21 +61,33 @@ export function Lists() {
         <Title>Listas</Title>
         <Subtitle>Adicione listas de compras</Subtitle>
 
-        <ListCount>1 lista cadastrada</ListCount>
+        <ListCount>
+          {shopList.length === 1
+            ? `${shopList.length} lista cadastrada`
+            : `${shopList.length} listas cadastradas`}
+        </ListCount>
 
-        <ListGalery>
-          <ListCard
-            title="Rancho da semana"
-            createdAt="23/03/2024"
-            itensQuantity={10}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            data={shopList}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <ListCard
+                createdAt={item.createdAt}
+                itensQuantity={item.items.length}
+                title={item.title}
+                onPress={() => handleNavigateToList(item)}
+              />
+            )}
+            contentContainerStyle={{
+              gap: 16,
+              width: '100%',
+              paddingBottom: 100,
+            }}
           />
-
-          <ListCard
-            title="Compras no mercadinho"
-            createdAt="28/03/2024"
-            itensQuantity={4}
-          />
-        </ListGalery>
+        )}
 
         <ButtonContainer>
           <Button
