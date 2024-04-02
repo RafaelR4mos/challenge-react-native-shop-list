@@ -14,6 +14,7 @@ import { useCallback, useState } from 'react';
 import { FlatList } from 'react-native';
 import { listsGetAll } from '../../storage/list/listGetAll';
 import { Loading } from '../../components/Loading';
+import { ListEmpty } from '../../components/ListEmpty/indes';
 
 export type ShoppingItem = {
   itemId: string;
@@ -80,6 +81,9 @@ export function Lists() {
                 title={item.title}
                 onPress={() => handleNavigateToList(item)}
               />
+            )}
+            ListEmptyComponent={() => (
+              <ListEmpty message="Nenhuma lista cadastrada. Adicione agora mesmo uma lista de compras." />
             )}
             contentContainerStyle={{
               gap: 16,

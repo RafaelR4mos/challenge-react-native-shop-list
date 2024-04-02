@@ -18,7 +18,7 @@ export function ListItem({ itemData, onDelete, onCheck }: ListItemProps) {
   const [isChecked, setChecked] = useState(itemData.checked);
 
   return (
-    <Container>
+    <Container style={isChecked && { opacity: 0.4 }}>
       <CheckboxButton
         value={isChecked}
         onValueChange={() => {
@@ -26,7 +26,13 @@ export function ListItem({ itemData, onDelete, onCheck }: ListItemProps) {
           onCheck();
         }}
       />
-      <Title style={isChecked && { textDecorationStyle: 'dotted' }}>
+      <Title
+        onPress={() => {
+          setChecked((state) => !state);
+          onCheck();
+        }}
+        style={isChecked && { textDecorationLine: 'line-through' }}
+      >
         {itemData.text}
       </Title>
       <DeleteButton onPress={onDelete}>

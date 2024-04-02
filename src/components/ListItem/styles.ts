@@ -26,6 +26,7 @@ export const Title = styled.Text`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     color: ${theme.COLORS.WHITE};
   `};
+  padding: 12px 0px;
 `;
 
 export const DeleteButton = styled(TouchableOpacity)`
@@ -33,7 +34,7 @@ export const DeleteButton = styled(TouchableOpacity)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 4px;
+  padding: 0 8px;
 `;
 
 export const DeleteIcon = styled(TrashSimple).attrs(({ theme }) => ({

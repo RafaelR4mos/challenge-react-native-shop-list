@@ -60,7 +60,10 @@ export function List() {
 
   async function fetchItemsByList() {
     try {
-      const itemsDataFromStorage = await itemGetByList(listData.id);
+      const itemsDataFromStorage: ShoppingItem[] = await itemGetByList(
+        listData.id
+      );
+      itemsDataFromStorage.sort((a) => (a.checked ? 1 : -1));
       setItems(itemsDataFromStorage);
     } catch (error) {
       console.log(error);
@@ -70,6 +73,7 @@ export function List() {
   async function handleCheckItem(itemIdToCheck: string, listId: string) {
     try {
       await itemCheckByList(itemIdToCheck, listId);
+      fetchItemsByList();
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert('Marcar um item', error.message);
@@ -156,7 +160,7 @@ export function List() {
         </ItemsHeaderContainer>
 
         <FlatList
-          data={items}
+          data={items.sort()}
           keyExtractor={({ itemId }) => itemId}
           renderItem={({ item }) => (
             <ListItem
