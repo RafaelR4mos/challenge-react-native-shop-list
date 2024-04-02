@@ -45,7 +45,7 @@ export const AddButton = styled(TouchableOpacity)`
   max-height: 55px;
   min-height: 55px;
 
-  max-height: 55;
+  max-height: 55px;
   min-width: 55px;
 
   border-radius: 8px;

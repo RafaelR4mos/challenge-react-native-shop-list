@@ -10,23 +10,26 @@ import {
 
 type ListItemProps = {
   itemData: ShoppingItem;
+  onDelete: () => void;
+  onCheck: () => void;
 };
 
-export function ListItem({ itemData }: ListItemProps) {
+export function ListItem({ itemData, onDelete, onCheck }: ListItemProps) {
   const [isChecked, setChecked] = useState(itemData.checked);
-
-  useEffect(() => {
-    //handleCheckItem
-  }, [isChecked]);
 
   return (
     <Container>
       <CheckboxButton
         value={isChecked}
-        onValueChange={setChecked}
+        onValueChange={() => {
+          setChecked((state) => !state);
+          onCheck();
+        }}
       />
-      <Title>{itemData.text}</Title>
-      <DeleteButton>
+      <Title style={isChecked && { textDecorationStyle: 'dotted' }}>
+        {itemData.text}
+      </Title>
+      <DeleteButton onPress={onDelete}>
         <DeleteIcon />
       </DeleteButton>
     </Container>

@@ -3,8 +3,8 @@ import { Basket } from 'phosphor-react-native';
 import { TouchableOpacity } from 'react-native';
 
 export const Container = styled(TouchableOpacity)`
-  min-height: 125px;
-  max-height: 125px;
+  min-height: 100px;
+  max-height: 100px;
   width: 100%;
   position: relative;
 

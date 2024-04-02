@@ -35,7 +35,7 @@ export const Subtitle = styled.Text`
 
 export const ListCount = styled.Text`
   text-align: left;
-  margin-bottom: 12;
+  margin-bottom: 12px;
 
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_200};

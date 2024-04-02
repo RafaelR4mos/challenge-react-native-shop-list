@@ -28,9 +28,9 @@ export function ListCard({
 
       <BasketIcon />
 
-      <CardBadgeContainer>
+      {/* <CardBadgeContainer>
         <CardBadgeText>{`${itensQuantity} itens`}</CardBadgeText>
-      </CardBadgeContainer>
+      </CardBadgeContainer> */}
     </Container>
   );
 }

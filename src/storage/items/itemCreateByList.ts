@@ -18,7 +18,6 @@ export async function itemCreateByList(newItem: ShoppingItem, listId: string) {
     }
 
     const newStorage = JSON.stringify([...storedItems, newItem]);
-    console.log(storedItems);
     await AsyncStorage.setItem(`${ITEM_COLLECTION}-${listId}`, newStorage);
   } catch (error) {
     throw error;

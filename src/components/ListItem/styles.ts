@@ -8,9 +8,12 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0 12px;
+  padding-bottom: 4px;
 
-  border-bottom: 1px solid white;
+  border: ${({ theme }) => `1px solid ${theme.COLORS.GRAY_600}`};
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
 `;
 
 export const CheckboxButton = styled(Checkbox)``;
@@ -27,9 +30,13 @@ export const Title = styled.Text`
 
 export const DeleteButton = styled(TouchableOpacity)`
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4px;
 `;
 
 export const DeleteIcon = styled(TrashSimple).attrs(({ theme }) => ({
   color: theme.COLORS.GRAY_600,
-  size: theme.FONT_SIZE.MD,
+  size: theme.FONT_SIZE.LG,
 }))``;
